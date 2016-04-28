@@ -3,6 +3,16 @@
 var position = 0;
 var faces = [];
 
+var rotationMap = {"up":"bottom","down":"top","left":"right","right":"left"};
+
+
+window.addEventListener("keydown",function (args) {
+	if(args.keyCode == 38 || args.keyCode == 87)move("up");
+	if(args.keyCode == 39 || args.keyCode == 68)move("right");
+	if(args.keyCode == 40 || args.keyCode == 83)move("down");
+	if(args.keyCode == 37 || args.keyCode == 65)move("left");
+})
+
 window.onload = function() {
 	var first = new Face(undefined,function (cnv,cnt) {
 		var width = cnv.width;
@@ -15,10 +25,6 @@ window.onload = function() {
 	draw();
 }
 
-window.addEventListener("keydown",function (args) {
-	move(args);
-})
-
 function Face(next,fn){
 	this.next = {};
 	if (next == undefined){
@@ -29,7 +35,7 @@ function Face(next,fn){
 		this.canvas = document.createElement('canvas');
 		this.canvas.width = 200;
 		this.canvas.heght = 200;
-		this.canvas.id = " basicFace";
+		//this.canvas.className = "basicFace";
 		this.context = this.canvas.getContext('2d');
 		this.draw(this.canvas,this.context);
 
@@ -40,6 +46,14 @@ function Face(next,fn){
 	this.next = next;
 	this.draw = fn;
 }
+
+function move(dir) {
+	if(faces[position][dir] != undefined){
+		faces[position].canvas.className=rotationMap[dir];
+		faces[position].next.canvas.className="front";
+	}
+}
+
 
 function drawTest(cont) {
 	context.strokeStyle = "#FF0000";
