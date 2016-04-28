@@ -1,7 +1,7 @@
 "use strict";
 
 var front;
-
+var rotationMap = {"up":"bottom","down":"top","left":"right","right":"left"};
 var gameContainer = document.getElementById('game');
 
 window.addEventListener("keydown",function (args) {
@@ -29,6 +29,13 @@ function removeFromContainer(face) {
 function appendToFront(face,dir) {
 	if (face == undefined)return;
 	if (front == undefined){
+		for (var a in front.next){
+			var cnv = document.createElement("canvas");
+			var ctx = cnv.getContext("2d");
+			face(cnv,ctx);
+			cnv.className = "front";
+		}
+
 		var cnv = document.createElement("canvas");
 		var ctx = cnv.getContext("2d");
 		face(cnv,ctx);
