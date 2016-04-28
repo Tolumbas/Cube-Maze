@@ -1,67 +1,88 @@
 "use strict";
 
-var position = 0;
-var faces = [];
+var front;
 
 var rotationMap = {"up":"bottom","down":"top","left":"right","right":"left"};
-
+var gameContainer = document.getElementById('game');
 
 window.addEventListener("keydown",function (args) {
-	if(args.keyCode == 38 || args.keyCode == 87)move("up");
-	if(args.keyCode == 39 || args.keyCode == 68)move("right");
-	if(args.keyCode == 40 || args.keyCode == 83)move("down");
-	if(args.keyCode == 37 || args.keyCode == 65)move("left");
+	if(args.keyCode == 38 || args.keyCode == 87){move("up");return;}
+	if(args.keyCode == 39 || args.keyCode == 68){move("right");return;}
+	if(args.keyCode == 40 || args.keyCode == 83){move("down");return;}
+	if(args.keyCode == 37 || args.keyCode == 65){move("left");return;}
 })
 
 window.onload = function() {
-	var first = new Face(undefined,function (cnv,cnt) {
+	front = new Face(function (cnv,cnt) {
 		var width = cnv.width;
 		var height = cnv.height;
 		cnt.fillStyle="rgb(248,237,240)";
 		cnt.fillRect(0,0,width,height);
 	});
-	faces.push(first);
-	first.load();
-	draw();
+	front.next = {};
+	front.next.up = front;
+	front.load();
+	front.canvas.className="front";
+	appendToContainer(front);
 }
 
-function Face(next,fn){
-	this.next = {};
-	if (next == undefined){
-		this.next.up = this;
-	}
+function Face(fn){
 
+	this.draw = fn;
+	var f = this;
 	this.load = function () {
-		this.canvas = document.createElement('canvas');
-		this.canvas.width = 200;
-		this.canvas.heght = 200;
-		//this.canvas.className = "basicFace";
-		this.context = this.canvas.getContext('2d');
-		this.draw(this.canvas,this.context);
-
-		this.clear = function () {
-			this.context
+		f.canvas = document.createElement('canvas');
+		f.canvas.width = 200;
+		f.canvas.heght = 200;
+		f.context = f.canvas.getContext('2d');
+		f.draw(f.canvas,f.context);
+		f.clear = function () {
+			f.context.clearRect(0,0,f.canvas.width,f.canvas.height);
 		}
 	}
-	this.next = next;
-	this.draw = fn;
+
 }
 
 function move(dir) {
-	if(faces[position][dir] != undefined){
-		faces[position].canvas.className=rotationMap[dir];
-		faces[position].next[dir].canvas.className="front";
+	if(front.next[dir] != undefined){
+		front.canvas.className=rotationMap[dir];
+		front.next[dir].canvas.className="front";
+		removeFromContainer(front);
+		front = front.next[dir];
+		appendToContainer(front);
 	}
+
+}
+function removeFromContainer(face) {
+	try{
+		gameContainer.removeChild(face.canvas);
+	}
+	catch(e){console.log("removeFromContainer:",e);}
+}
+function appendToContainer(face) {
+	gameContainer.appendChild(face.canvas);
+}
+function render() {
+	// appendToContainer(front);
+	// if(front.next.up != undefined)appendToContainer(front.next.up);
+	// if(front.next.down != undefined)appendToContainer(front.next.down);
+	// if(front.next.left != undefined)appendToContainer(front.next.left);
+	// if(front.next.right != undefined)appendToContainer(front.next.right);
+
 }
 
 
-function drawTest(cont) {
-	context.strokeStyle = "#FF0000";
-	context.beginPath();
-	context.moveTo(10,10);
-	context.lineTo(100,100);
-	context.stroke();
-}
-function draw() {
 
-}
+
+
+
+
+
+
+
+
+
+
+
+
+//
