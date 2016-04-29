@@ -27,15 +27,15 @@
   transition-duration: 0.5s;
   -webkit-transition-duration: 0.5s;
 }
-.left{
-  transform: rotateX(0) rotateY(90deg);
-  -webkit-transform: rotateX(0) rotateY(90deg);
-  -ms-transform: rotateX(0) rotateY(90deg);
-}
 .right{
-  transform: rotateX(0) rotateY(-90deg);
-  -webkit-transform: rotateX(0) rotateY(-90deg);
-  -ms-transform: rotateX(0) rotateY(-90deg);
+  transform: rotateX(180deg) rotateY(90deg);
+  -webkit-transform: rotateX(180deg) rotateY(90deg);
+  -ms-transform: rotateX(180deg) rotateY(90deg);
+}
+.left{
+  transform: rotateX(180deg) rotateY(-90deg);
+  -webkit-transform: rotateX(180deg) rotateY(-90deg);
+  -ms-transform: rotateX(180deg) rotateY(-90deg);
 }
 .bottom{
   transform: rotateX(90deg) rotateY(0);
@@ -43,9 +43,9 @@
   -ms-transform: rotateX(90deg) rotateY(0);
 }
 .top{
-  transform: rotateX(-90deg) rotateY(0);
-  -webkit-transform: rotateX(-90deg) rotateY(0);
-  -ms-transform: rotateX(-90deg) rotateY(0);
+  transform: rotateX(270deg) rotateY(0);
+  -webkit-transform: rotateX(270deg) rotateY(0);
+  -ms-transform: rotateX(270deg) rotateY(0);
 }
 .back{
   transform: rotateX(0) rotateY(0);
