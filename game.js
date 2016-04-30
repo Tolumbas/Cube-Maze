@@ -17,6 +17,7 @@ window.onload = function() {
 		var width = cnv.width;
 		var height = cnv.height;
 		cnt.fillStyle="rgb(248,237,240)";
+		cnt.fillText("zdrasti",10,10);
 		cnt.fillRect(0,0,width,height);
 	};
 	first.next = {};
@@ -30,17 +31,6 @@ window.onload = function() {
 function removeFromContainer(face) {
 		gameContainer.removeChild(face);
 }
-/*
-function loadNext(face){
-	if (face == undefined || face.next == undefined)return;
-	for (var f in face.next){
-		var cnv = document.createElement("canvas");
-		cnv.className = rotationMap[f];
-		var ctx = cnv.getContext("2d");
-		face.next[f](cnv,ctx);
-		gameContainer.appendChild(cnv);
-	}
-}*/
 
 function appendToFront(face,dir) {
 	if (face == undefined)return;
