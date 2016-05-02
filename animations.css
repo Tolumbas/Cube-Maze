@@ -6,53 +6,56 @@
 	box-sizing: border-box;
 }
 .wrap {
-  perspective: 500px;
+  perspective: 900px;
+	width:100%;
+	height:50%;
+	display: flex;
+	justify-content: center; /* align horizontal */
+	align-items: center; /* align vertical */
 }
 .cube{
   transform-style: preserve-3d;
 
-  -webkit-transform-origin: 100px 100px 100px;
-  transform-origin: 100px 100px 100px;
-  width: 200px;
-  margin:300px auto;
+  -webkit-transform-origin: 200px 200px 200px;
+  transform-origin: 200px 200px 200px;
+  width: 400px;
+
 }
 .cube canvas{
 	border: 2px solid black;
   background-color: rgba(100, 155, 50, 0.3);
-  -webkit-transform-origin: 100px 100px 100px;
-  transform-origin: 100px 100px 100px;
+  -webkit-transform-origin: 200px 200px -200px;
+  transform-origin: 200px 200px -200px;
   position: absolute;
-  width: 200px;
-  height: 200px;
   transition-duration: 0.5s;
   -webkit-transition-duration: 0.5s;
 }
-.right{
-  transform: rotateX(180deg) rotateY(90deg);
-  -webkit-transform: rotateX(180deg) rotateY(90deg);
-  -ms-transform: rotateX(180deg) rotateY(90deg);
-}
 .left{
-  transform: rotateX(180deg) rotateY(-90deg);
-  -webkit-transform: rotateX(180deg) rotateY(-90deg);
-  -ms-transform: rotateX(180deg) rotateY(-90deg);
+  transform: rotateX(0) rotateY(90deg);
+  -webkit-transform: rotateX(0) rotateY(90deg);
+  -ms-transform: rotateX(0) rotateY(90deg);
 }
-.bottom{
+.right{
+  transform: rotateX(0) rotateY(-90deg);
+  -webkit-transform: rotateX(0) rotateY(-90deg);
+  -ms-transform: rotateX(0) rotateY(-90deg);
+}
+.top{
   transform: rotateX(90deg) rotateY(0);
   -webkit-transform: rotateX(90deg) rotateY(0);
   -ms-transform: rotateX(90deg) rotateY(0);
 }
-.top{
-  transform: rotateX(270deg) rotateY(0);
-  -webkit-transform: rotateX(270deg) rotateY(0);
-  -ms-transform: rotateX(270deg) rotateY(0);
+.bottom{
+  transform: rotateX(-90deg) rotateY(0);
+  -webkit-transform: rotateX(-90deg) rotateY(0);
+  -ms-transform: rotateX(-90deg) rotateY(0);
 }
-.back{
+.front{
   transform: rotateX(0) rotateY(0);
   -webkit-transform: rotateX(0) rotateY(0);
   -ms-transform: rotateX(0) rotateY(0);
 }
-.front{
+.back{
   transform: rotateX(180deg) rotateY(0);
   -webkit-transform: rotateX(180deg) rotateY(0);
   -ms-transform: rotateX(180deg) rotateY(0);
